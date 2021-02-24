@@ -205,6 +205,8 @@ GameObject:
   m_Component:
   - component: {fileID: 138593792}
   - component: {fileID: 138593793}
+  - component: {fileID: 138593795}
+  - component: {fileID: 138593794}
   m_Layer: 0
   m_Name: Gear_Green
   m_TagString: Untagged
@@ -276,6 +278,43 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &138593794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138593791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb7a976ba556dc640a71213a0edd2ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _distanceToSnap: 1
+  _snappablePoints:
+  - {fileID: 835694890}
+  - {fileID: 1045452152}
+  - {fileID: 354351665}
+  - {fileID: 280688391}
+  - {fileID: 1793381920}
+  onDragOffset: {x: 0, y: 0, z: 0}
+  cam: {fileID: 1190493997}
+--- !u!58 &138593795
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138593791}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.00000047683716, y: -0.0000009536743}
+  serializedVersion: 2
+  m_Radius: 1.2799999
 --- !u!1 &185771821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,6 +1526,8 @@ GameObject:
   m_Component:
   - component: {fileID: 245082228}
   - component: {fileID: 245082229}
+  - component: {fileID: 245082231}
+  - component: {fileID: 245082230}
   m_Layer: 0
   m_Name: Gear_Yellow
   m_TagString: Untagged
@@ -1558,6 +1599,43 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &245082230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245082227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb7a976ba556dc640a71213a0edd2ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _distanceToSnap: 1
+  _snappablePoints:
+  - {fileID: 835694890}
+  - {fileID: 1045452152}
+  - {fileID: 354351665}
+  - {fileID: 280688391}
+  - {fileID: 1793381920}
+  onDragOffset: {x: 0, y: 0, z: 0}
+  cam: {fileID: 1190493997}
+--- !u!58 &245082231
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245082227}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.0000009536743}
+  serializedVersion: 2
+  m_Radius: 1.2799999
 --- !u!1 &247006319
 GameObject:
   m_ObjectHideFlags: 0
@@ -14448,6 +14526,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1004399243}
   - component: {fileID: 1004399244}
+  - component: {fileID: 1004399246}
+  - component: {fileID: 1004399245}
   m_Layer: 0
   m_Name: Gear_Purple
   m_TagString: Untagged
@@ -14519,6 +14599,43 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1004399245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004399242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb7a976ba556dc640a71213a0edd2ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _distanceToSnap: 1
+  _snappablePoints:
+  - {fileID: 835694890}
+  - {fileID: 1045452152}
+  - {fileID: 354351665}
+  - {fileID: 280688391}
+  - {fileID: 1793381920}
+  onDragOffset: {x: 0, y: 0, z: 0}
+  cam: {fileID: 1190493997}
+--- !u!58 &1004399246
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004399242}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0000009536743, y: -0.00000023841858}
+  serializedVersion: 2
+  m_Radius: 1.2799999
 --- !u!1 &1037967812
 GameObject:
   m_ObjectHideFlags: 0
@@ -17960,6 +18077,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1602421350}
   - component: {fileID: 1602421351}
+  - component: {fileID: 1602421353}
+  - component: {fileID: 1602421352}
   m_Layer: 0
   m_Name: Gear_Blue
   m_TagString: Untagged
@@ -18031,6 +18150,43 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1602421352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602421349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb7a976ba556dc640a71213a0edd2ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _distanceToSnap: 1
+  _snappablePoints:
+  - {fileID: 835694890}
+  - {fileID: 1045452152}
+  - {fileID: 354351665}
+  - {fileID: 280688391}
+  - {fileID: 1793381920}
+  onDragOffset: {x: 0, y: 0, z: 0}
+  cam: {fileID: 1190493997}
+--- !u!58 &1602421353
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602421349}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.00000023841858, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.2799999
 --- !u!1 &1654679968
 GameObject:
   m_ObjectHideFlags: 0
