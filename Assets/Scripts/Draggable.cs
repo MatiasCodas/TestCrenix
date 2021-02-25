@@ -1,26 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using UnityEngine;
+using DG.Tweening;
 
-public class Draggable : MonoBehaviour
+public class Draggable : MonoBehaviour,  IDragHandler, IEndDragHandler
 {
     [SerializeField] private float _distanceToSnap = 1f;
+    [SerializeField] Vector3 onDragOffset = new Vector3(0, 0, 0);
     [SerializeField] private List<SnapPoint> _snappablePoints;
     [SerializeField] private SnapPoint _startSnap;
     [SerializeField] private SnapPoint _actualSnap;
-    [SerializeField] private float speedRotation = 10f;
-    [SerializeField] private Vector3 startSize = new Vector3(0.6f, 0.6f, 0.6f);
-    [SerializeField] private Vector3 bigSize = new Vector3(1f, 1f, 1f);
+    [SerializeField] private float _rotationSpeed = 10f;
+    [SerializeField] private float _rotationDuration = 5f;
+    [SerializeField] private Ease _rotationEase = Ease.Linear;
+    [SerializeField] private Vector3 startSize = new Vector3(1f, 1f, 1f);
+    [SerializeField] private Vector3 bigSize = new Vector3(1.5f, 1.5f, 1.5f);
 
-    private SpriteRenderer spriteRenderer;
+    //private SpriteRenderer spriteRenderer;
+    public Sprite[] gearSprite;
+    public RectTransform rectTransform;
+    private Image image;
     public Camera cam;
     private bool dragging;
     private bool snapped;
-    private float direction;
+    public float direction =1;
+    private bool spinning;
+    private bool resetGear;
 
     private void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        rectTransform = GetComponent<RectTransform>();
+        image = GetComponent<Image>();
         _actualSnap = _startSnap;
         _actualSnap.isEmpty = false;
         snapped = true;
@@ -37,28 +49,26 @@ public class Draggable : MonoBehaviour
 
             SnapGear();
         }
-
-        if (GearsManager.Instance.snappedGears.Count != 5) return;
-        RotateGear();
     }
 
-    private void OnMouseDrag()
-    {
-        spriteRenderer.sortingOrder = 1;
+    public void OnDrag(PointerEventData eventData)
+    {   
+        transform.SetAsLastSibling();
         dragging = true;
         snapped = false;
         _actualSnap.isEmpty = true;
 
         var pos = cam.ScreenToWorldPoint(Input.mousePosition);
+        pos += onDragOffset;
         pos.z = 0;
         transform.position = pos;
         if(_actualSnap.snapType != SnapType.Inventory) { GearsManager.Instance.RemoveGear(this); }
     }
 
-    private void OnMouseUp()
+    public void OnEndDrag(PointerEventData eventData)
     {
         dragging = false;
-        spriteRenderer.sortingOrder = 0;
+        //spriteRenderer.sortingOrder = 0;
 
         foreach (SnapPoint snap in _snappablePoints)
         {
@@ -78,26 +88,49 @@ public class Draggable : MonoBehaviour
 
     private void SnapGear()
     {
+        rectTransform.DOMove(_actualSnap.transform.position,0.1f);
         if (_actualSnap.snapType == SnapType.Inventory)
         {
+            rectTransform.DOScale(startSize, 0.5f);
+            image.sprite = gearSprite[0];
             GearsManager.Instance.RemoveGear(this);
-            transform.localScale = startSize;
         }
         else
         {
+            rectTransform.DOScale(bigSize, 0.5f);
+            image.sprite = gearSprite[1];
             GearsManager.Instance.AddGear(this);
-            transform.localScale = bigSize;
         }
-        transform.position = _actualSnap.transform.position;
-
     }
 
-    private void RotateGear()
+    public void RotateGear()
     {
         if (_actualSnap.snapType == SnapType.Bottom) { direction = 1; }
         else { direction = -1; }
 
-        transform.Rotate(new Vector3(0, 0, speedRotation * direction));
+        rectTransform.DOLocalRotate(new Vector3(0, 0, _rotationSpeed * direction), _rotationDuration,RotateMode.FastBeyond360).SetEase(_rotationEase).SetLoops(-1);
+        spinning = true;
+    }
+
+    public void ResetPosition()
+    {
+        if (_actualSnap == _startSnap) return;
+        GearsManager.Instance.RemoveGear(this);
+
+        resetGear = true;
+        _actualSnap.isEmpty = true;
+        _actualSnap = _startSnap;
+        image.sprite = gearSprite[0];
+        _actualSnap.isEmpty = false;
+
+        rectTransform.DOMove(_actualSnap.transform.position, 1f).SetEase(Ease.InOutSine).OnComplete(() => { rectTransform.DOScale(startSize, 0.5f); });
+        resetGear = false;
+    }
+
+    public void StopSpinnig()
+    {
+        rectTransform.DOKill();
+        rectTransform.DOLocalRotate(new Vector3(0, 0, 0), 0.01f);
     }
 
 }
