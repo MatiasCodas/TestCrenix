@@ -9,7 +9,9 @@ public class GearsManager : MonoBehaviour
     public List<Draggable> snappedGears;
     public List<Draggable> allGears;
 
+    public Nugget nugget;
     public TMP_Text nuggetText;
+    public GameObject accent;
     public string[] nuggetMessages;
 
     private void Awake()
@@ -26,7 +28,9 @@ public class GearsManager : MonoBehaviour
 
         if (snappedGears.Count == 5)
         {
+            nugget.Jump();
             nuggetText.text = nuggetMessages[1];
+            accent.SetActive(true);
 
             for (int i = 0; i < snappedGears.Count; i++)
             {
@@ -40,8 +44,8 @@ public class GearsManager : MonoBehaviour
         if(snappedGears.Count == 5)
         {
             nuggetText.text = nuggetMessages[0];
-
-            for(int i =0; i < snappedGears.Count; i++)
+            accent.SetActive(false);
+            for (int i =0; i < snappedGears.Count; i++)
             {
                 snappedGears[i].StopSpinnig();
             }

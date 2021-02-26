@@ -108,7 +108,11 @@ public class Draggable : MonoBehaviour,  IDragHandler, IEndDragHandler
         if (_actualSnap.snapType == SnapType.Bottom) { direction = 1; }
         else { direction = -1; }
 
-        rectTransform.DOLocalRotate(new Vector3(0, 0, _rotationSpeed * direction), _rotationDuration,RotateMode.FastBeyond360).SetEase(_rotationEase).SetLoops(-1);
+        rectTransform.DOLocalRotate(new Vector3(0, 0, _rotationSpeed * direction), _rotationDuration, RotateMode.WorldAxisAdd).SetEase(Ease.InQuad).OnComplete(() => 
+        {
+            rectTransform.DOLocalRotate(new Vector3(0, 0, _rotationSpeed * direction), _rotationDuration/2, RotateMode.WorldAxisAdd).SetEase(_rotationEase).SetLoops(-1);
+        });
+
         spinning = true;
     }
 
@@ -130,7 +134,7 @@ public class Draggable : MonoBehaviour,  IDragHandler, IEndDragHandler
     public void StopSpinnig()
     {
         rectTransform.DOKill();
-        rectTransform.DOLocalRotate(new Vector3(0, 0, 0), 0.01f);
+        rectTransform.DOLocalRotate(new Vector3(0, 0,rectTransform.localRotation.z + (180*direction)), 1f,RotateMode.WorldAxisAdd).SetEase(Ease.OutSine);
     }
 
 }
