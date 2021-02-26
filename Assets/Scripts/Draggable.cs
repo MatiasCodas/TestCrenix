@@ -26,8 +26,6 @@ public class Draggable : MonoBehaviour,  IDragHandler, IEndDragHandler
     private bool dragging;
     private bool snapped;
     public float direction =1;
-    private bool spinning;
-    private bool resetGear;
 
     private void Start()
     {
@@ -37,7 +35,6 @@ public class Draggable : MonoBehaviour,  IDragHandler, IEndDragHandler
         _actualSnap.isEmpty = false;
         snapped = true;
     }
-
 
     private void Update()
     {
@@ -68,7 +65,6 @@ public class Draggable : MonoBehaviour,  IDragHandler, IEndDragHandler
     public void OnEndDrag(PointerEventData eventData)
     {
         dragging = false;
-        //spriteRenderer.sortingOrder = 0;
 
         foreach (SnapPoint snap in _snappablePoints)
         {
@@ -112,8 +108,6 @@ public class Draggable : MonoBehaviour,  IDragHandler, IEndDragHandler
         {
             rectTransform.DOLocalRotate(new Vector3(0, 0, _rotationSpeed * direction), _rotationDuration/2, RotateMode.WorldAxisAdd).SetEase(_rotationEase).SetLoops(-1);
         });
-
-        spinning = true;
     }
 
     public void ResetPosition()
@@ -121,14 +115,12 @@ public class Draggable : MonoBehaviour,  IDragHandler, IEndDragHandler
         if (_actualSnap == _startSnap) return;
         GearsManager.Instance.RemoveGear(this);
 
-        resetGear = true;
         _actualSnap.isEmpty = true;
         _actualSnap = _startSnap;
         image.sprite = gearSprite[0];
         _actualSnap.isEmpty = false;
 
         rectTransform.DOMove(_actualSnap.transform.position, 1f).SetEase(Ease.InOutSine).OnComplete(() => { rectTransform.DOScale(startSize, 0.5f); });
-        resetGear = false;
     }
 
     public void StopSpinnig()

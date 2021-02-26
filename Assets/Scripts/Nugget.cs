@@ -10,12 +10,26 @@ public class Nugget : MonoBehaviour
     public TMP_Text nuggetText;
     private string oldText;
     public string newText;
+    public GameObject accent;
+    private bool accentActive;
 
     public void NuggetJump()
     {
+        if (accent.activeInHierarchy)
+        {
+            accentActive = true;
+            accent.SetActive(false);
+        }
+
         oldText = nuggetText.text;
         nuggetText.text = newText;
-        _targetRectTransform.DOPunchPosition(_targetRectTransform.transform.position, 2f).OnComplete(() => { nuggetText.text = oldText; });
+
+        _targetRectTransform.DOPunchPosition(_targetRectTransform.transform.position, 2f).OnComplete(() =>
+        {
+            nuggetText.text = oldText;
+            if (accentActive) accent.SetActive(true);
+            accentActive = false;
+        });
     }
 
     public void Jump()
