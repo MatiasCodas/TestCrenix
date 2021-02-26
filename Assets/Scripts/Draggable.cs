@@ -18,7 +18,6 @@ public class Draggable : MonoBehaviour,  IDragHandler, IEndDragHandler
     [SerializeField] private Vector3 startSize = new Vector3(1f, 1f, 1f);
     [SerializeField] private Vector3 bigSize = new Vector3(1.5f, 1.5f, 1.5f);
 
-    //private SpriteRenderer spriteRenderer;
     public Sprite[] gearSprite;
     public RectTransform rectTransform;
     private Image image;
