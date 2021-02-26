@@ -1,2 +1,2 @@
 # TestCrenix
-Versão final do teste na branch master
+Versão final do teste na branch master, na cena "mainScene"
